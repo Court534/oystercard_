@@ -26,7 +26,7 @@ describe Oystercard do
   end
 
   it { is_expected.to respond_to(:deduct).with(1).argument }
- 
+
   it { is_expected.to respond_to(:touch_in) }
   it { is_expected.to respond_to(:touch_out) }
 
@@ -47,6 +47,6 @@ describe Oystercard do
 
   it 'Not touch in if below minimum balance' do
     minimum_balance = Oystercard::MINIMUM_BALANCE
-    expect{ subject.touch_in }.to raise_error "Insufficient balance, minimum balance is #{minimum_balance}"
+    expect { subject.touch_in }.to raise_error "Insufficient balance, minimum balance is #{minimum_balance}"
   end
 end
