@@ -51,14 +51,14 @@ describe Oystercard do
   end
 
   it 'deducts the correct ammount from my card when my journy is complete' do
-    expect{ subject.touch_out }.to change{ subject.balance }.by (-Oystercard::MINIMUM_BALANCE) 
+    expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
   end
 
   let(:station) { double 'station' }
   it 'expects the card to remember the entry station after the touch in' do
     subject.top_up(10)
     subject.touch_in(station)
-    expect(subject.entry_station).to eq (station)
+    expect(subject.entry_station).to eq(station)
   end
 
   it 'forget the entry station on touch out' do
