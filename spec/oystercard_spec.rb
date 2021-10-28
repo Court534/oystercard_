@@ -51,7 +51,7 @@ describe Oystercard do
   end
 
   it 'deducts the correct ammount from my card when my journy is complete' do
-    expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
+    expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
   end
 
   let(:station) { double 'station' }
@@ -64,7 +64,18 @@ describe Oystercard do
   it 'forget the entry station on touch out' do
     subject.top_up(10)
     subject.touch_in(station)
-    subject.touch_out
+    subject.touch_out(station)
     expect(subject.entry_station).to eq nil
+  end
+
+  it 'check journey list is empty by defualt' do
+    expect(subject.journeys).to be_empty
+  end
+
+  it 'check that touching in and out created one journey' do
+    subject.top_up(10)
+    subject.touch_in(station)
+    subject.touch_out(station)
+    expect(subject.journeys.length).to eq 1
   end
 end
